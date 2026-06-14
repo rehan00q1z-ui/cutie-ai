@@ -16,38 +16,15 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.19.x'
-          channel: 'stable'
-
-      - name: Auto-Create Flet Settings
+      - name: Install Flet
         run: |
-          echo "app:" > flet.yaml
-          echo "  name: \"Cutie AI\"" >> flet.yaml
-          echo "  package: \"com.boss.cutieai\"" >> flet.yaml
-          echo "  version: \"1.0.0\"" >> flet.yaml
-
-      - name: Install System Dependencies
-        run: |
-          python -m pip install --upgrade pip
           pip install flet requests elevenlabs
 
-      - name: Build Debug Android APK
+      - name: Build APK
         run: |
-          python -m flet build apk --build-number 1 --build-version 1.0.0 --output build_output --no-assets --add-pip-packages requests,elevenlabs
-          
-      - name: Upload APK Artifact
+          flet build apk --output build_output
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Cutie-AI-App
