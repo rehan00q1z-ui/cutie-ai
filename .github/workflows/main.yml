@@ -34,6 +34,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet requests elevenlabs
 
-      - name: Inject ElevenLabs into Flet Build
+      - name: Build Android APK
         run: |
           flet build apk --output build_output --no-assets --add-pip-packages requests,elevenlabs
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cutie-AI-App
+          path: build_output/*.apk
