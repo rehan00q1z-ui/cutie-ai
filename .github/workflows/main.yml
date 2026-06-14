@@ -43,10 +43,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet requests elevenlabs
 
-      - name: Force Build Android APK
+      - name: Build Debug Android APK
         run: |
-          python -m flet build apk --output build_output --no-assets --add-pip-packages requests,elevenlabs
-
+          python -m flet build apk --build-number 1 --build-version 1.0.0 --output build_output --no-assets --add-pip-packages requests,elevenlabs
+          
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
