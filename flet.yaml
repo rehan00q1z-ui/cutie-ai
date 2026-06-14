@@ -1,0 +1,5 @@
+# Flet App Configuration
+app:
+  name: "Cutie AI"
+  package: "com.boss.cutieai"
+  version: "1.0.0"
