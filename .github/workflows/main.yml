@@ -29,17 +29,11 @@ jobs:
           echo "  package: \"com.boss.cutieai\"" >> flet.yaml
           echo "  version: \"1.0.0\"" >> flet.yaml
 
-      - name: Install Dependencies
+      - name: Install System Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flet requests elevenlabs
 
-      - name: Build Android APK
+      - name: Inject ElevenLabs into Flet Build
         run: |
-          flet build apk --output build_output --no-assets
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Cutie-AI-App
-          path: build_output/*.apk
+          flet build apk --output build_output --no-assets --add-pip-packages requests,elevenlabs
