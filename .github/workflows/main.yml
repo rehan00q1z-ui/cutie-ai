@@ -19,10 +19,13 @@ jobs:
       - name: Install Flet
         run: |
           pip install flet requests elevenlabs
+          # यह लाइन यह सुनिश्चित करेगी कि flet कमांड का पता चल जाए
+          python -m pip install flet
 
       - name: Build APK
         run: |
-          flet build apk --output build_output
+          # अब हम सीधे पायथन मॉड्यूल के ज़रिए बिल्ड चला रहे हैं
+          python -m flet build apk --output build_output
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
